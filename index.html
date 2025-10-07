@@ -1,3 +1,4 @@
+ HEAD
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -232,5 +233,276 @@
   });
 </script>
 
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile Card Responsive</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+  />
+
+  <style>
+    /* -------- RESET -------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* -------- BODY -------- */
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at top left, #5b21b6, #6d28d9, #7e22ce, #4c1d95);
+      font-family: "Poppins", sans-serif;
+      padding: 20px;
+    }
+
+    /* -------- LAYOUT (DÙNG FLEX) -------- */
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    /* -------- CARD -------- */
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+      padding: 30px;
+      text-align: center;
+      width: 100%;
+      max-width: 320px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .card__img img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #c77dff;
+      margin-bottom: 10px;
+      transition: transform 0.3s;
+    }
+
+    .card h2 {
+      font-size: 1.4em;
+      color: #3b0764;
+      margin: 10px 0 5px;
+    }
+
+    .card p {
+      color: #7e22ce;
+      margin-bottom: 15px;
+      word-break: break-word;
+    }
+
+    .card__social {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .card__social a {
+      text-decoration: none;
+      color: #a855f7;
+      font-size: 1.3em;
+      transition: 0.3s;
+    }
+
+    .card__social a:hover {
+      color: #c084fc;
+      transform: scale(1.2);
+    }
+
+    .youtube-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #9333ea;
+      color: white;
+      padding: 10px 25px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1em;
+      transition: 0.3s;
+      gap: 8px;
+    }
+
+    .youtube-button:hover {
+      background: #7e22ce;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* -------- RESPONSIVE -------- */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .card {
+        max-width: 90%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 20px;
+      }
+
+      .card__img img {
+        width: 100px;
+        height: 100px;
+      }
+
+      .card h2 {
+        font-size: 1.2em;
+      }
+
+      .youtube-button {
+        padding: 8px 20px;
+        font-size: 0.9em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="card__img">
+        <img src="https://www.shutterstock.com/image-vector/calisthenic-athlete-do-planche-layered-600w-1080812840.jpg" alt="Avatar" />
+      </div>
+      <h2>Nhật Nam</h2>
+      <p>@nam_workout</p>
+
+      <div class="card__social">
+        <a href="https://www.facebook.com/t.nem2009" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.youtube.com/@nam_workout/videos" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.tiktok.com/@nam_workout2009" target="_blank"><i class="fab fa-tiktok"></i></a>
+        <a href="https://github.com/wednhatnamproplus" target="_blank"><i class="fab fa-github"></i></a>
+      </div>
+
+      <a href="https://www.youtube.com/@nam_workout/videos" target="_blank" class="youtube-button">
+        <i class="fab fa-youtube"></i> Sub
+      </a>
+    </div>
+  </div>
+
+  <script>
+    /* ---------------- HIỆU ỨNG TUYẾT ---------------- */
+    class Snowflake {
+      constructor(x, y, size, speed, rotationSpeed) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.speed = speed;
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotationSpeed = rotationSpeed;
+      }
+
+      draw(ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        ctx.strokeStyle = "rgba(255,255,255,0.95)";
+        ctx.lineWidth = 1.5;
+
+        for (let i = 0; i < 6; i++) {
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(0, -this.size);
+          ctx.moveTo(0, -this.size * 0.6);
+          ctx.lineTo(this.size * 0.25, -this.size * 0.8);
+          ctx.moveTo(0, -this.size * 0.6);
+          ctx.lineTo(-this.size * 0.25, -this.size * 0.8);
+          ctx.stroke();
+          ctx.rotate(Math.PI / 3);
+        }
+        ctx.restore();
+      }
+
+      update() {
+        this.y += this.speed;
+        this.x += Math.sin(this.y / 50) * 0.4;
+        this.rotation += this.rotationSpeed;
+
+        if (this.y > window.innerHeight + this.size) {
+          this.y = -this.size;
+          this.x = Math.random() * window.innerWidth;
+        }
+      }
+    }
+
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    document.body.appendChild(canvas);
+
+    canvas.style.position = "fixed";
+    canvas.style.left = "0";
+    canvas.style.top = "0";
+    canvas.style.pointerEvents = "none";
+    canvas.style.zIndex = "9999";
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const snowflakes = [];
+    for (let i = 0; i < 25; i++) {
+      snowflakes.push(
+        new Snowflake(
+          Math.random() * canvas.width,
+          Math.random() * canvas.height,
+          8 + Math.random() * 5,
+          0.6 + Math.random() * 0.6,
+          (Math.random() - 0.5) * 0.006
+        )
+      );
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const flake of snowflakes) {
+        flake.update();
+        flake.draw(ctx);
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
 </body>
 </html>
