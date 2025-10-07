@@ -26,7 +26,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(20, 30, 60, 0.5);
+      background: rgba(20, 30, 60, 0.45);
       backdrop-filter: blur(2px);
       z-index: 0;
     }
@@ -38,17 +38,17 @@
       max-width: 1200px;
       position: relative;
       z-index: 2;
+      flex-wrap: wrap;
     }
     .card {
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.25);
       backdrop-filter: blur(10px);
       border: 2px solid rgba(255, 255, 255, 0.4);
       border-radius: 20px;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
       padding: 30px;
       text-align: center;
-      width: 100%;
-      max-width: 320px;
+      width: min(90%, 320px);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
       overflow: hidden;
@@ -114,28 +114,13 @@
       transform: scale(1.05);
     }
     @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-      }
-      .card {
-        max-width: 90%;
-      }
+      .card__img img { width: 100px; height: 100px; }
+      .card { padding: 25px; }
     }
     @media (max-width: 480px) {
-      .card {
-        padding: 20px;
-      }
-      .card__img img {
-        width: 100px;
-        height: 100px;
-      }
-      .card h2 {
-        font-size: 1.2em;
-      }
-      .youtube-button {
-        padding: 8px 20px;
-        font-size: 0.9em;
-      }
+      .card { padding: 20px; }
+      .card h2 { font-size: 1.2em; }
+      .youtube-button { padding: 8px 20px; font-size: 0.9em; }
     }
   </style>
 </head>
@@ -158,181 +143,108 @@
   </div>
 
   <script>
-   // --- TUYẾT RƠI MỀM MẠI & LUNG LINH ---
-class Tuyet {
-  constructor(x, y, k, v, rot) {
-    this.x = x;
-    this.y = y;
-    this.k = k;
-    this.v = v;
-    this.rot = rot;
-    this.g = Math.random() * Math.PI * 2;
-    this.doSang = 0.6 + Math.random() * 0.4; // độ sáng ngẫu nhiên
-    this.trongSuot = 0.6 + Math.random() * 0.4; // độ trong suốt
-  }
-
-  ve(ctx) {
-    ctx.save();
-    ctx.translate(this.x, this.y);
-    ctx.rotate(this.g);
-    const mau = `rgba(255,255,255,${this.trongSuot})`;
-    const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.k);
-    gradient.addColorStop(0, `rgba(255,255,255,${this.doSang})`);
-    gradient.addColorStop(1, "rgba(255,255,255,0)");
-    ctx.fillStyle = gradient;
-    ctx.beginPath();
-    ctx.arc(0, 0, this.k, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-  }
-
-  capnhat() {
-    this.y += this.v;
-    this.x += Math.sin(this.y / 50) * 0.6;
-    this.g += this.rot;
-    if (this.y > innerHeight + this.k) {
-      this.y = -this.k;
-      this.x = Math.random() * innerWidth;
+  // --- TUYẾT RƠI MỀM MẠI ---
+  class Tuyet {
+    constructor(x, y, k, v, rot) {
+      this.x = x; this.y = y; this.k = k; this.v = v; this.rot = rot;
+      this.g = Math.random() * Math.PI * 2;
+      this.trong = 0.5 + Math.random() * 0.4;
     }
-  }
-}
-
-const c = document.createElement("canvas");
-const ctx = c.getContext("2d");
-document.body.appendChild(c);
-Object.assign(c.style, {
-  position: "fixed",
-  top: 0,
-  left: 0,
-  pointerEvents: "none",
-  zIndex: "1",
-});
-
-function resize() {
-  c.width = innerWidth;
-  c.height = innerHeight;
-}
-window.addEventListener("resize", resize);
-resize();
-
-// tạo tuyết với nhiều kích cỡ & tốc độ khác nhau
-const dsTuyet = Array.from({ length: 120 }, () =>
-  new Tuyet(
-    Math.random() * c.width,
-    Math.random() * c.height,
-    1 + Math.random() * 4,
-    0.5 + Math.random() * 1.5,
-    (Math.random() - 0.5) * 0.01
-  )
-);
-
-function loopTuyet() {
-  ctx.clearRect(0, 0, c.width, c.height);
-  dsTuyet.forEach((t) => {
-    t.capnhat();
-    t.ve(ctx);
-  });
-  requestAnimationFrame(loopTuyet);
-}
-loopTuyet();
-
-    // --- ÁNH SÁNG NGANG ---
-    const c2 = document.createElement("canvas");
-    const ctx2 = c2.getContext("2d");
-    document.body.appendChild(c2);
-    Object.assign(c2.style, { position: "fixed", top: 0, left: 0, pointerEvents: "none", zIndex: "2" });
-
-    function resize2() {
-      c2.width = innerWidth;
-      c2.height = innerHeight;
+    ve(ctx) {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.g);
+      const g = ctx.createRadialGradient(0, 0, 0, 0, 0, this.k);
+      g.addColorStop(0, `rgba(255,255,255,${this.trong})`);
+      g.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(0, 0, this.k, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
     }
-    window.addEventListener("resize", resize2);
-    resize2();
-
-    const asang = Array.from({ length: 6 }, () => ({ x: Math.random() * c2.width, y: Math.random() * c2.height, d: 150 + Math.random() * 150, t: Math.random() * 0.02 + 0.005 }));
-
-    function loopSang() {
-      ctx2.clearRect(0, 0, c2.width, c2.height);
-      for (let a of asang) {
-        let grad = ctx2.createLinearGradient(a.x - a.d, a.y, a.x + a.d, a.y);
-        grad.addColorStop(0, "transparent");
-        grad.addColorStop(0.5, "rgba(255,255,255,0.4)");
-        grad.addColorStop(1, "transparent");
-        ctx2.fillStyle = grad;
-        ctx2.fillRect(a.x - a.d, a.y - 2, a.d * 2, 4);
-        a.x += a.d * a.t;
-        if (a.x - a.d > c2.width) {
-          a.x = -a.d;
-          a.y = Math.random() * c2.height;
-        }
+    capnhat(w, h) {
+      this.y += this.v;
+      this.x += Math.sin(this.y / 60) * 0.6;
+      this.g += this.rot;
+      if (this.y > h + this.k) {
+        this.y = -this.k;
+        this.x = Math.random() * w;
       }
-      requestAnimationFrame(loopSang);
     }
-    loopSang();
-// --- ÁNH SÁNG CHÉO MỀM MẠI QUA CARD ---
-const the = document.querySelector(".card");
-const cn = document.createElement("canvas");
-const ctxn = cn.getContext("2d");
-document.querySelector(".container").appendChild(cn);
-Object.assign(cn.style, {
-  position: "absolute",
-  pointerEvents: "none",
-  zIndex: "10",
-  borderRadius: "20px",
-  top: "0",
-  left: "0",
-  overflow: "hidden",
-});
+  }
 
-function capnhat() {
-  const v = the.getBoundingClientRect();
-  const cont = document.querySelector(".container").getBoundingClientRect();
-  cn.width = v.width;
-  cn.height = v.height;
-  cn.style.left = v.left - cont.left + "px";
-  cn.style.top = v.top - cont.top + "px";
-}
-capnhat();
-window.addEventListener("resize", capnhat);
-window.addEventListener("scroll", capnhat);
+  const c = document.createElement("canvas");
+  const ctx = c.getContext("2d");
+  document.body.appendChild(c);
+  Object.assign(c.style, { position: "fixed", top: 0, left: 0, pointerEvents: "none", zIndex: "1" });
 
-let vt = -150;
-let toc = 5; // <--- đổi const thành let ở đây
-const goc = -Math.PI / 6;
-const rong = 50;
+  let dsTuyet = [];
+  function resize() {
+    c.width = innerWidth;
+    c.height = innerHeight;
+    const soLuong = Math.floor(innerWidth / 15);
+    dsTuyet = Array.from({ length: soLuong }, () =>
+      new Tuyet(Math.random() * c.width, Math.random() * c.height, 1 + Math.random() * 3, 0.5 + Math.random() * 1.5, (Math.random() - 0.5) * 0.01)
+    );
+  }
+  window.addEventListener("resize", resize);
+  resize();
 
-function ve() {
-  const v = the.getBoundingClientRect();
-  ctxn.clearRect(0, 0, cn.width, cn.height);
-  ctxn.save();
-  ctxn.beginPath();
-  ctxn.roundRect(0, 0, cn.width, cn.height, 20);
-  ctxn.clip();
-  ctxn.translate(vt, v.height / 2);
-  ctxn.rotate(goc);
+  function loop() {
+    ctx.clearRect(0, 0, c.width, c.height);
+    dsTuyet.forEach(t => { t.capnhat(c.width, c.height); t.ve(ctx); });
+    requestAnimationFrame(loop);
+  }
+  loop();
 
-  const grad = ctxn.createLinearGradient(-rong, 0, rong, 0);
-  grad.addColorStop(0, "rgba(255,255,200,0)");
-  grad.addColorStop(0.35, "rgba(255,230,150,0.15)");
-  grad.addColorStop(0.5, "rgba(255,255,180,0.35)");
-  grad.addColorStop(0.65, "rgba(255,220,100,0.2)");
-  grad.addColorStop(1, "rgba(255,255,200,0)");
+  // --- ÁNH SÁNG CHÉO ---
+  const the = document.querySelector(".card");
+  const cn = document.createElement("canvas");
+  const ctxn = cn.getContext("2d");
+  document.querySelector(".container").appendChild(cn);
+  Object.assign(cn.style, { position: "absolute", pointerEvents: "none", zIndex: "10", borderRadius: "20px" });
 
-  ctxn.fillStyle = grad;
-  ctxn.shadowColor = "rgba(255,255,180,0.4)";
-  ctxn.shadowBlur = 15;
-  ctxn.fillRect(-rong, -v.height, rong * 2, v.height * 2);
-  ctxn.restore();
+  function capnhatCanh() {
+    const v = the.getBoundingClientRect();
+    const cont = document.querySelector(".container").getBoundingClientRect();
+    cn.width = v.width;
+    cn.height = v.height;
+    cn.style.left = v.left - cont.left + "px";
+    cn.style.top = v.top - cont.top + "px";
+  }
 
- vt += toc;
-if (vt > v.width + v.height) {
-  vt = -100; // reset lại vị trí, tốc độ giữ nguyên
-}
-requestAnimationFrame(ve);
+  const obs = new ResizeObserver(capnhatCanh);
+  obs.observe(the);
+  window.addEventListener("resize", capnhatCanh);
+  capnhatCanh();
 
-}
-ve();
-
+  let vt = -150, toc = 4, goc = -Math.PI / 6, rong = 50;
+  function veAnhSang() {
+    const v = the.getBoundingClientRect();
+    ctxn.clearRect(0, 0, cn.width, cn.height);
+    ctxn.save();
+    ctxn.beginPath();
+    ctxn.roundRect(0, 0, cn.width, cn.height, 20);
+    ctxn.clip();
+    ctxn.translate(vt, v.height / 2);
+    ctxn.rotate(goc);
+    const grad = ctxn.createLinearGradient(-rong, 0, rong, 0);
+    grad.addColorStop(0, "rgba(255,255,200,0)");
+    grad.addColorStop(0.35, "rgba(255,230,150,0.15)");
+    grad.addColorStop(0.5, "rgba(255,255,180,0.35)");
+    grad.addColorStop(0.65, "rgba(255,220,100,0.2)");
+    grad.addColorStop(1, "rgba(255,255,200,0)");
+    ctxn.fillStyle = grad;
+    ctxn.shadowColor = "rgba(255,255,180,0.4)";
+    ctxn.shadowBlur = 15;
+    ctxn.fillRect(-rong, -v.height, rong * 2, v.height * 2);
+    ctxn.restore();
+    vt += toc;
+    if (vt > v.width + v.height) vt = -100;
+    requestAnimationFrame(veAnhSang);
+  }
+  veAnhSang();
   </script>
 </body>
 </html>
