@@ -3,85 +3,81 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Profile Card Responsive</title>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
-  />
-
+  <title>Profile Card Tuyết Rơi + Ánh Sáng</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
   <style>
-    /* -------- RESET -------- */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
-    /* -------- BODY -------- */
     body {
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(circle at top left, #5b21b6, #6d28d9, #7e22ce, #4c1d95);
+      background: url("https://dfjx2uxqg3cgi.cloudfront.net/img/photo/267068/267068_00_2x.jpg") no-repeat center center/cover;
       font-family: "Poppins", sans-serif;
       padding: 20px;
       overflow: hidden;
+      position: relative;
     }
-
-    /* -------- LAYOUT -------- */
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(20, 30, 60, 0.5);
+      backdrop-filter: blur(2px);
+      z-index: 0;
+    }
     .container {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      gap: 30px;
       width: 100%;
       max-width: 1200px;
-      animation: fadeIn 0.6s ease;
+      position: relative;
+      z-index: 2;
     }
-
-    /* -------- CARD -------- */
     .card {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(12px);
-      border: 2px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.4);
       border-radius: 20px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
       padding: 30px;
       text-align: center;
       width: 100%;
       max-width: 320px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
-
     .card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-6px);
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
     }
-
     .card__img img {
       width: 120px;
       height: 120px;
       border-radius: 50%;
       object-fit: cover;
       border: 4px solid #c77dff;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       transition: transform 0.3s;
     }
-
     .card h2 {
       font-size: 1.4em;
-      color: #3b0764;
-      margin: 10px 0 5px;
+      color: #f0f5ff;
+      margin: 8px 0 4px;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
     }
-
     .card p {
-      color: #7e22ce;
+      color: #e0e8ff;
       margin-bottom: 15px;
       word-break: break-word;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     }
-
     .card__social {
       display: flex;
       justify-content: center;
@@ -89,24 +85,21 @@
       margin-bottom: 15px;
       flex-wrap: wrap;
     }
-
     .card__social a {
       text-decoration: none;
-      color: #a855f7;
+      color: #d0e0ff;
       font-size: 1.3em;
       transition: 0.3s;
     }
-
     .card__social a:hover {
-      color: #c084fc;
+      color: #ffffff;
       transform: scale(1.2);
     }
-
     .youtube-button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: #9333ea;
+      background: rgba(147, 51, 234, 0.8);
       color: white;
       padding: 10px 25px;
       border-radius: 25px;
@@ -116,43 +109,29 @@
       transition: 0.3s;
       gap: 8px;
     }
-
     .youtube-button:hover {
-      background: #7e22ce;
+      background: rgba(126, 34, 206, 0.9);
       transform: scale(1.05);
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* -------- RESPONSIVE -------- */
     @media (max-width: 768px) {
       .container {
         flex-direction: column;
-        gap: 20px;
       }
-
       .card {
         max-width: 90%;
       }
     }
-
     @media (max-width: 480px) {
       .card {
         padding: 20px;
       }
-
       .card__img img {
         width: 100px;
         height: 100px;
       }
-
       .card h2 {
         font-size: 1.2em;
       }
-
       .youtube-button {
         padding: 8px 20px;
         font-size: 0.9em;
@@ -160,7 +139,6 @@
     }
   </style>
 </head>
-
 <body>
   <div class="container">
     <div class="card">
@@ -169,101 +147,175 @@
       </div>
       <h2>Nhật Nam</h2>
       <p>@nam_workout</p>
-
       <div class="card__social">
-        <a href="https://www.facebook.com/t.nem2009" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.youtube.com/@nam_workout/videos" target="_blank"><i class="fab fa-youtube"></i></a>
-        <a href="https://www.tiktok.com/@nam_workout2009" target="_blank"><i class="fab fa-tiktok"></i></a>
-        <a href="https://github.com/wednhatnamproplus" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
       </div>
-
-      <a href="https://www.youtube.com/@nam_workout/videos" target="_blank" class="youtube-button">
-        <i class="fab fa-youtube"></i> Sub
-      </a>
+      <a href="#" class="youtube-button"><i class="fab fa-youtube"></i> Sub</a>
     </div>
   </div>
 
   <script>
-    /* ---------------- HIỆU ỨNG TUYẾT ---------------- */
-    class BongTuyet {
-      constructor(x, y, kt, toc, quay) {
+    // --- TUYẾT RƠI ---
+    class Tuyet {
+      constructor(x, y, k, v, rot) {
         this.x = x;
         this.y = y;
-        this.kt = kt;
-        this.toc = toc;
-        this.goc = Math.random() * Math.PI * 2;
-        this.quay = quay;
+        this.k = k;
+        this.v = v;
+        this.rot = rot;
+        this.g = Math.random() * Math.PI * 2;
       }
-
       ve(ctx) {
         ctx.save();
         ctx.translate(this.x, this.y);
-        ctx.rotate(this.goc);
-        ctx.strokeStyle = "rgba(255,255,255,0.95)";
-        ctx.lineWidth = 1.5;
+        ctx.rotate(this.g);
+        ctx.strokeStyle = "rgba(255,255,255,0.9)";
+        ctx.lineWidth = 1.2;
         for (let i = 0; i < 6; i++) {
           ctx.beginPath();
           ctx.moveTo(0, 0);
-          ctx.lineTo(0, -this.kt);
-          ctx.moveTo(0, -this.kt * 0.6);
-          ctx.lineTo(this.kt * 0.25, -this.kt * 0.8);
-          ctx.moveTo(0, -this.kt * 0.6);
-          ctx.lineTo(-this.kt * 0.25, -this.kt * 0.8);
+          ctx.lineTo(0, -this.k);
+          ctx.moveTo(0, -this.k * 0.6);
+          ctx.lineTo(this.k * 0.25, -this.k * 0.8);
+          ctx.moveTo(0, -this.k * 0.6);
+          ctx.lineTo(-this.k * 0.25, -this.k * 0.8);
           ctx.stroke();
           ctx.rotate(Math.PI / 3);
         }
         ctx.restore();
       }
-
       capnhat() {
-        this.y += this.toc;
-        this.x += Math.sin(this.y / 50) * 0.4;
-        this.goc += this.quay;
-        if (this.y > window.innerHeight + this.kt) {
-          this.y = -this.kt;
-          this.x = Math.random() * window.innerWidth;
+        this.y += this.v;
+        this.x += Math.sin(this.y / 50) * 0.5;
+        this.g += this.rot;
+        if (this.y > innerHeight + this.k) {
+          this.y = -this.k;
+          this.x = Math.random() * innerWidth;
         }
       }
     }
 
-    const cv = document.createElement("canvas");
-    const ctx = cv.getContext("2d");
-    document.body.appendChild(cv);
-    cv.style.position = "fixed";
-    cv.style.left = "0";
-    cv.style.top = "0";
-    cv.style.pointerEvents = "none";
-    cv.style.zIndex = "9999";
-    cv.width = window.innerWidth;
-    cv.height = window.innerHeight;
+    const c = document.createElement("canvas");
+    const ctx = c.getContext("2d");
+    document.body.appendChild(c);
+    Object.assign(c.style, { position: "fixed", top: 0, left: 0, pointerEvents: "none", zIndex: "1" });
 
-    const bongtuyet = [];
-    for (let i = 0; i < 35; i++) {
-      bongtuyet.push(
-        new BongTuyet(
-          Math.random() * cv.width,
-          Math.random() * cv.height,
-          8 + Math.random() * 5,
-          0.6 + Math.random() * 0.6,
-          (Math.random() - 0.5) * 0.006
-        )
-      );
+    function resize() {
+      c.width = innerWidth;
+      c.height = innerHeight;
     }
+    window.addEventListener("resize", resize);
+    resize();
 
-    function chay() {
-      ctx.clearRect(0, 0, cv.width, cv.height);
-      for (const b of bongtuyet) {
-        b.capnhat();
-        b.ve(ctx);
+    const dsTuyet = Array.from({ length: 25 }, () => new Tuyet(Math.random() * c.width, Math.random() * c.height, 6 + Math.random() * 8, 0.8 + Math.random() * 0.7, (Math.random() - 0.5) * 0.01));
+
+    function loopTuyet() {
+      ctx.clearRect(0, 0, c.width, c.height);
+      dsTuyet.forEach(t => { t.capnhat(); t.ve(ctx); });
+      requestAnimationFrame(loopTuyet);
+    }
+    loopTuyet();
+
+    // --- ÁNH SÁNG NGANG ---
+    const c2 = document.createElement("canvas");
+    const ctx2 = c2.getContext("2d");
+    document.body.appendChild(c2);
+    Object.assign(c2.style, { position: "fixed", top: 0, left: 0, pointerEvents: "none", zIndex: "2" });
+
+    function resize2() {
+      c2.width = innerWidth;
+      c2.height = innerHeight;
+    }
+    window.addEventListener("resize", resize2);
+    resize2();
+
+    const asang = Array.from({ length: 6 }, () => ({ x: Math.random() * c2.width, y: Math.random() * c2.height, d: 150 + Math.random() * 150, t: Math.random() * 0.02 + 0.005 }));
+
+    function loopSang() {
+      ctx2.clearRect(0, 0, c2.width, c2.height);
+      for (let a of asang) {
+        let grad = ctx2.createLinearGradient(a.x - a.d, a.y, a.x + a.d, a.y);
+        grad.addColorStop(0, "transparent");
+        grad.addColorStop(0.5, "rgba(255,255,255,0.4)");
+        grad.addColorStop(1, "transparent");
+        ctx2.fillStyle = grad;
+        ctx2.fillRect(a.x - a.d, a.y - 2, a.d * 2, 4);
+        a.x += a.d * a.t;
+        if (a.x - a.d > c2.width) {
+          a.x = -a.d;
+          a.y = Math.random() * c2.height;
+        }
       }
-      requestAnimationFrame(chay);
+      requestAnimationFrame(loopSang);
     }
-    chay();
+    loopSang();
+// --- ÁNH SÁNG CHÉO MỀM MẠI QUA CARD ---
+const the = document.querySelector(".card");
+const cn = document.createElement("canvas");
+const ctxn = cn.getContext("2d");
+document.querySelector(".container").appendChild(cn);
+Object.assign(cn.style, {
+  position: "absolute",
+  pointerEvents: "none",
+  zIndex: "10",
+  borderRadius: "20px",
+  top: "0",
+  left: "0",
+  overflow: "hidden",
+});
 
-    window.addEventListener("resize", () => {
-      cv.width = window.innerWidth;
-      cv.height = window.innerHeight;
-    });
+function capnhat() {
+  const v = the.getBoundingClientRect();
+  const cont = document.querySelector(".container").getBoundingClientRect();
+  cn.width = v.width;
+  cn.height = v.height;
+  cn.style.left = v.left - cont.left + "px";
+  cn.style.top = v.top - cont.top + "px";
+}
+capnhat();
+window.addEventListener("resize", capnhat);
+window.addEventListener("scroll", capnhat);
+
+let vt = -150;
+let toc = 5; // <--- đổi const thành let ở đây
+const goc = -Math.PI / 6;
+const rong = 50;
+
+function ve() {
+  const v = the.getBoundingClientRect();
+  ctxn.clearRect(0, 0, cn.width, cn.height);
+  ctxn.save();
+  ctxn.beginPath();
+  ctxn.roundRect(0, 0, cn.width, cn.height, 20);
+  ctxn.clip();
+  ctxn.translate(vt, v.height / 2);
+  ctxn.rotate(goc);
+
+  const grad = ctxn.createLinearGradient(-rong, 0, rong, 0);
+  grad.addColorStop(0, "rgba(255,255,200,0)");
+  grad.addColorStop(0.35, "rgba(255,230,150,0.15)");
+  grad.addColorStop(0.5, "rgba(255,255,180,0.35)");
+  grad.addColorStop(0.65, "rgba(255,220,100,0.2)");
+  grad.addColorStop(1, "rgba(255,255,200,0)");
+
+  ctxn.fillStyle = grad;
+  ctxn.shadowColor = "rgba(255,255,180,0.4)";
+  ctxn.shadowBlur = 15;
+  ctxn.fillRect(-rong, -v.height, rong * 2, v.height * 2);
+  ctxn.restore();
+
+ vt += toc;
+if (vt > v.width + v.height) {
+  vt = -100; // reset lại vị trí, tốc độ giữ nguyên
+}
+requestAnimationFrame(ve);
+
+}
+ve();
+
   </script>
 </body>
 </html>
