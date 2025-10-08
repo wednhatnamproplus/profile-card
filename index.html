@@ -122,6 +122,18 @@
       .card h2 { font-size: 1.2em; }
       .youtube-button { padding: 8px 20px; font-size: 0.9em; }
     }
+    .watermark {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  color: rgba(255, 255, 255, 0.3); /* Màu trắng mờ */
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  user-select: none; /* Không copy được */
+  pointer-events: none; /* Không ảnh hưởng khi click */
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
   </style>
 </head>
 <body>
@@ -246,5 +258,6 @@
   }
   veAnhSang();
   </script>
+  <div class="watermark">Composed: Nam Workout ©</div>
 </body>
 </html>
